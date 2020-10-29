@@ -84,3 +84,11 @@ void ms_gc::linked_list<T>::push(T new_value) {
     this->top_node->next = new linked_list_node<T>();
     this->top_node = this->top_node->next;
 }
+
+template<typename T>
+void ms_gc::linked_list<T>::cut(typename ms_gc::linked_list<T>::iterator first, typename ms_gc::linked_list<T>::iterator last) {
+    if (first.list_instance != last.list_instance) {
+        throw std::invalid_argument("Cutting elements of different lists");
+    }
+    first.p->next = last.p;
+}

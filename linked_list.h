@@ -1,5 +1,5 @@
 #pragma once
-#include <iterator>
+#include <stdexcept>
 
 
 namespace ms_gc {
@@ -14,6 +14,7 @@ namespace ms_gc {
 
     template<typename T>
     class linked_list_iterator {
+        friend linked_list<T>;
         private:
             linked_list_node<T>* p;
             linked_list<T>* list_instance;
