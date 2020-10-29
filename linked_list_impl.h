@@ -92,3 +92,8 @@ void ms_gc::linked_list<T>::cut(typename ms_gc::linked_list<T>::iterator first, 
     }
     first.p->next = last.p;
 }
+
+template<typename T>
+bool ms_gc::linked_list<T>::has_elements() {
+    return !(this->root_node == this->top_node);
+}

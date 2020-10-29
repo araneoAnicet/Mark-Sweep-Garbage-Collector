@@ -45,5 +45,6 @@ namespace ms_gc {
             linked_list(T initial_value);
             void push(T new_value);
             void cut(iterator first, iterator last);
+            bool has_elements();
     };
 };
