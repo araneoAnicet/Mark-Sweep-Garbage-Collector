@@ -5,20 +5,22 @@
 namespace ms_gc {
     template<class T>
     struct linked_list_node {
-        T* value;
-        T* next;
+        T value;
+        linked_list_node<T>* next;
     };
 
     template<typename T>
-    class linked_list_iterator: public std::iterator<std::input_iterator_tag, T> {
+    class linked_list_iterator {
+        private:
+            linked_list_node<T>* p;
         public:
-            linked_list_iterator(const linked_list_iterator& it);
-            linked_list_iterator(T* p);
+            linked_list_iterator(linked_list_node<T>* node);
+            linked_list_iterator();
 
-            bool operator!=(linked_list_iterator const& other) const;
-            bool operator==(linked_list_iterator const& other) const;
-            typename linked_list_iterator::reference operator*() const;
-            linked_list_iterator& operator++();
+            bool operator!=(linked_list_iterator const& other);
+            bool operator==(linked_list_iterator const& other);
+            T operator*();
+            linked_list_iterator<T>* operator++(int n);
     };
 
 
@@ -26,10 +28,14 @@ namespace ms_gc {
     class linked_list {
         private:
             linked_list_node<T>* root_node;
-            linked_list_node<T>* top;
+            linked_list_node<T>* top_node;
         public:
-
+            typedef linked_list_iterator<T> iterator;
+            typedef linked_list<const T> const_iterator;
+            iterator begin();
+            iterator end();
             linked_list();
-            linked_list(T* initial_value);
+            linked_list(T initial_value);
+            void push(T new_value);
     };
 };
