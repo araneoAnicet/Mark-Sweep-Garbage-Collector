@@ -5,14 +5,22 @@
 */
 
 template<typename T>
+ms_gc::linked_list_iterator<T>::linked_list_iterator(ms_gc::linked_list<T>* list_instance) {
+    this->p = nullptr;
+    this->list_instance = list_instance;
+}
+
+template<typename T>
+ms_gc::linked_list_iterator<T>::linked_list_iterator(ms_gc::linked_list_node<T>* node, ms_gc::linked_list<T>* list_instance) {
+    this->p = node;
+    this->list_instance = list_instance;
+}
+
+template<typename T>
 ms_gc::linked_list_iterator<T>::linked_list_iterator() {
     this->p = nullptr;
 }
 
-template<typename T>
-ms_gc::linked_list_iterator<T>::linked_list_iterator(ms_gc::linked_list_node<T>* node) {
-    this->p = node;
-}
 
 template<typename T>
 bool ms_gc::linked_list_iterator<T>::operator!=(linked_list_iterator const& other) {
@@ -37,6 +45,12 @@ ms_gc::linked_list_iterator<T>* ms_gc::linked_list_iterator<T>::operator++(int n
     }
     return this;
 }
+
+template<typename T>
+ms_gc::linked_list_iterator<T>* ms_gc::linked_list_iterator<T>::operator++() {
+    this->p = this->p->next;
+    return this;
+}
 /*
     Linked list itself
 */
@@ -56,12 +70,12 @@ ms_gc::linked_list<T>::linked_list(T initial_value) {
 
 template<typename T>
 typename ms_gc::linked_list<T>::iterator ms_gc::linked_list<T>::begin() {
-    return iterator(this->root_node);
+    return iterator(this->root_node, this);
 }
 
 template<typename T>
 typename ms_gc::linked_list<T>::iterator ms_gc::linked_list<T>::end() {
-    return iterator(this->top_node);
+    return iterator(this->top_node, this);
 }
 
 template<typename T>

@@ -9,18 +9,24 @@ namespace ms_gc {
         linked_list_node<T>* next;
     };
 
+    template<class T>
+    class linked_list;
+
     template<typename T>
     class linked_list_iterator {
         private:
             linked_list_node<T>* p;
+            linked_list<T>* list_instance;
         public:
-            linked_list_iterator(linked_list_node<T>* node);
+            linked_list_iterator(linked_list_node<T>* node, linked_list<T>* list_instance);
+            linked_list_iterator(linked_list<T>* list_instance);
             linked_list_iterator();
 
             bool operator!=(linked_list_iterator const& other);
             bool operator==(linked_list_iterator const& other);
             T operator*();
             linked_list_iterator<T>* operator++(int n);
+            linked_list_iterator<T>* operator++();
     };
 
 
@@ -37,5 +43,6 @@ namespace ms_gc {
             linked_list();
             linked_list(T initial_value);
             void push(T new_value);
+            void cut(iterator first, iterator last);
     };
 };
