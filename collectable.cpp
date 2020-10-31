@@ -4,6 +4,10 @@ void ms_gc::collectable::mark() {
     this->marked = true;
 }
 
+void ms_gc::collectable::unmark() {
+    this->marked = false;
+}
+
 void ms_gc::collectable::init_collectable() {
     ms_gc::garbage_collector::get_instance()->add_node(this);
 }

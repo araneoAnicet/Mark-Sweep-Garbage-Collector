@@ -11,6 +11,7 @@ namespace ms_gc {
             bool marked = false;
             linked_list<collectable*> pointing_to;
             void mark();
+            void unmark();
             void init_collectable();
         public:
             void remove();
