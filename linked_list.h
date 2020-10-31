@@ -7,6 +7,7 @@ namespace ms_gc {
     struct linked_list_node {
         T value;
         linked_list_node<T>* next;
+        linked_list_node<T>* prev;
     };
 
     template<class T>
