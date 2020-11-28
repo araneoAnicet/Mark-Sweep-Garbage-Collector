@@ -1,5 +1,16 @@
 #include "collectable.h"
 
+void ms_gc::collectable::init() {
+    this->me = new ms_gc::connection_node();
+    this->me->collectable_item = this;
+    this->me->is_available = true;
+}
+
+ms_gc::collectable::collectable() {
+    this->init();
+    this->init_collectable();
+}
+
 void ms_gc::collectable::mark() {
     this->marked = true;
 }
@@ -13,11 +24,12 @@ void ms_gc::collectable::init_collectable() {
 }
 
 void ms_gc::collectable::remove() {
-    ms_gc::garbage_collector::get_instance()->notify_delete(this);
+    this->me->is_available = false;
+    ms_gc::garbage_collector::get_instance()->notify_delete();
 }
 
 void ms_gc::collectable::point_to(ms_gc::collectable* other) {
-    this->pointing_to.push(other);
+    this->pointing_to.push(other->me);
 }
 
 bool ms_gc::collectable::points_to_nodes() {

@@ -14,7 +14,7 @@ namespace ms_gc {
         void __mark_nodes(collectable* node);
     public:
         static void init();
-        void notify_delete(collectable* notifier);
+        void notify_delete();
         void add_node(collectable* node);
         static garbage_collector* get_instance();
     };

@@ -16,20 +16,21 @@ void ms_gc::garbage_collector::add_node(ms_gc::collectable* node) {
     this->collectables.push(node);
 }
 
-void ms_gc::garbage_collector::notify_delete(ms_gc::collectable* notifier) {
-    notifier->mark();
+void ms_gc::garbage_collector::notify_delete() {
     this->__mark();
     this->__sweep();
 }
 
 void ms_gc::garbage_collector::__mark_nodes(ms_gc::collectable* node) {
-    if (node->points_to_nodes()) {
-        for (ms_gc::collectable* temp : node->pointing_to) {
-            this->__mark_nodes(temp);
-        }
-    } else {
-        node->mark();
+    if (!(node->me->is_available)) {
+        return;
     }
+    if (node->points_to_nodes()) {
+        for (ms_gc::connection_node* temp : node->pointing_to) {
+            this->__mark_nodes(temp->collectable_item);
+        }
+    }
+    node->mark();
 }
 
 void ms_gc::garbage_collector::__mark() {
@@ -41,13 +42,13 @@ void ms_gc::garbage_collector::__sweep() {
     std::cout << "Entered sweep" << std::endl;
     ms_gc::linked_list<collectable*>::iterator it;
     ms_gc::linked_list<collectable*>::iterator from;
-    bool do_cutting = false;
     it = this->collectables.begin();
     while (it != this->collectables.end()) {
-        std::cout << "iteration" << std::endl;
+        std::cout << "Iterating over: " << (*it)->id.get() << std::endl;
         if (!(*it)->marked) {
-            std::cout << "Unmarked is being deleted..." << std::endl;
-            delete *it;
+            std::cout << "Deleting object " << (*it)->id.get() << std::endl;
+            collectable* p = *it;
+            delete p;
         }
         it++;
     }
