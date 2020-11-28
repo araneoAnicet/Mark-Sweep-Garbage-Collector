@@ -11,6 +11,10 @@ ms_gc::collectable::collectable() {
     this->init_collectable();
 }
 
+ms_gc::collectable::~collectable() {
+    return;
+}
+
 void ms_gc::collectable::mark() {
     this->marked = true;
 }

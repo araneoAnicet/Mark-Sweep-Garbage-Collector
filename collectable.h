@@ -12,7 +12,6 @@ namespace ms_gc {
         bool is_available = false;
     };
 
-    //class collectable;
     class garbage_collector;
     class collectable {
         friend garbage_collector;
@@ -26,6 +25,7 @@ namespace ms_gc {
             void init_collectable();
         public:
             collectable();
+            virtual ~collectable();
             void remove();
             void point_to(collectable* other);
             bool points_to_nodes();
