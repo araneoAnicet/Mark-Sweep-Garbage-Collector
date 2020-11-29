@@ -37,6 +37,10 @@ void ms_gc::collectable::point_to(ms_gc::collectable* other) {
     this->pointing_to.push(other->me);
 }
 
+void ms_gc::collectable::bind_to_root() {
+    ms_gc::garbage_collector::get_instance()->bind_to_root(this);
+}
+
 bool ms_gc::collectable::points_to_nodes() {
     return this->pointing_to.has_elements();
 }

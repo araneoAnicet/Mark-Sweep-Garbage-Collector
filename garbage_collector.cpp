@@ -21,6 +21,12 @@ void ms_gc::garbage_collector::notify_delete() {
     this->__sweep();
 }
 
+void ms_gc::garbage_collector::bind_to_root(ms_gc::collectable* node) {
+    ms_gc::linked_list<collectable*>::iterator it = this->collectables.begin();
+    ms_gc::collectable* root_node = *it;
+    root_node->point_to(node);
+}
+
 void ms_gc::garbage_collector::__mark_nodes(ms_gc::collectable* node) {
     if (!(node->me->is_available)) {
         return;

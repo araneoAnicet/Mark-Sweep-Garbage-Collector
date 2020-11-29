@@ -28,6 +28,7 @@ namespace ms_gc {
             virtual ~collectable();
             void remove();
             void point_to(collectable* other);
+            void bind_to_root();
             bool points_to_nodes();
             Identity id;
     };

@@ -13,6 +13,7 @@ namespace ms_gc {
         void __mark();
         void __sweep();
         void __mark_nodes(collectable* node);
+        void bind_to_root(collectable* node);
     public:
         static void init();
         void notify_delete();
