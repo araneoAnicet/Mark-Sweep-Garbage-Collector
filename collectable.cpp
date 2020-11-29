@@ -13,6 +13,7 @@ ms_gc::collectable::collectable() {
 }
 
 ms_gc::collectable::~collectable() {
+    delete this->me;
     return;
 }
 
