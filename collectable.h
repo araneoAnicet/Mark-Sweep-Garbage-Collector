@@ -31,4 +31,6 @@ namespace ms_gc {
             bool points_to_nodes();
             Identity id;
     };
+
+    class root_collectable : public collectable {};
 }

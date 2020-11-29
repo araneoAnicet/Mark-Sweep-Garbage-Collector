@@ -9,6 +9,7 @@ void ms_gc::collectable::init() {
 ms_gc::collectable::collectable() {
     this->init();
     this->init_collectable();
+    std::cout << "Allocated collectable obect with id " << this->id.get() << std::endl;
 }
 
 ms_gc::collectable::~collectable() {

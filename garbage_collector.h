@@ -2,6 +2,7 @@
 #include "linked_list_impl.h"
 #include "collectable.h"
 
+
 namespace ms_gc {
     class collectable;
     class garbage_collector {
