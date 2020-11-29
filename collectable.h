@@ -1,7 +1,7 @@
 #pragma once
 #include "linked_list_impl.h"
 #include "garbage_collector.h"
-#include "Identity.h"
+
 
 namespace ms_gc {
 
@@ -30,7 +30,6 @@ namespace ms_gc {
             void point_to(collectable* other);
             void bind_to_root();
             bool points_to_nodes();
-            Identity id;
     };
 
     class root_collectable : public collectable {};

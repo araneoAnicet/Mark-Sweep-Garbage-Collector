@@ -45,16 +45,13 @@ void ms_gc::garbage_collector::__mark() {
 }
 
 void ms_gc::garbage_collector::__sweep() {
-    std::cout << "Entered sweep" << std::endl;
     ms_gc::linked_list<collectable*>::iterator it;
     ms_gc::linked_list<collectable*>::iterator last_marked;
     bool do_cutting = false;
     it = this->collectables.begin();
 
     while (it != this->collectables.end()) {
-        std::cout << "Iterating over: " << (*it)->id.get() << std::endl;
         if (!(*it)->marked) {
-            std::cout << "Deleting object " << (*it)->id.get() << std::endl;
             collectable* p = *it;
             delete p;
             do_cutting = true;
